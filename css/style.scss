@@ -1,0 +1,149 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  transition: 0.5s;
+  background-color: #f53b57;
+}
+.nav {
+  position: relative;
+  width: 350px;
+  height: 70px;
+  background: #fff;
+  border-radius: 35px;
+  box-shadow: 0 15px 25px rgba(0, 0, 0, 0.1);
+  ul {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    display: flex;
+    //!======初始-未按下======
+    li {
+      position: relative;
+      list-style: none;
+      width: 70px;
+      height: 70px;
+      z-index: 1;
+      a {
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        text-align: center;
+        color: #333;
+        font-weight: 500;
+        .icon {
+          position: relative;
+          display: block;
+          line-height: 75px;
+          text-align: center;
+          transition: 0.5s;
+          .fa {
+            font-size: 24px;
+          }
+        }
+        .title {
+          position: absolute;
+          top: -75px;
+          left: 50%;
+          transform: translate(-50%, 5%);
+          background: #fff;
+          width: auto;
+          padding: 6px 3px;
+          border-radius: 6px;
+          box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+          transition: 0.5s;
+          opacity: 0;
+          visibility: hidden;
+          //!---生成 菱形 對話框下尖點---
+          &::before {
+            content: "";
+            position: absolute;
+            width: 12px;
+            height: 12px;
+            background: #fff;
+            bottom: -9px;
+            left: 48%;
+            transform: rotate(45deg) translateX(-50%);
+            border-radius: 2px;
+          }
+        }
+      }
+    }
+  }
+}
+//!======啟動-滑鼠經過hover======
+.nav ul {
+  //!---顯示-白icon---
+  li.active a .icon {
+    color: #fff;
+  }
+  //!---顯示-文字氣泡---
+  li:hover a .title {
+    opacity: 1;
+    visibility: visible;
+  }
+  //!---icon滑鼠接觸範圍 + 圓圈背景色--
+  //!---滑鼠接觸-範圍
+  .indicator {
+    position: absolute;
+    left: 0;
+    width: 70px;
+    height: 70px;
+    //background: #ff0;
+    transition: 0.5s;
+    //!---預設-icon背景色(圓+黑)
+    &::before {
+      content: "";
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: #333;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      transition: 0.5s;
+    }
+  }
+  //!---平移效果---
+  li:nth-child(1).active ~ .indicator {
+    transform: translateX(calc(70px * 0));
+  }
+  li:nth-child(2).active ~ .indicator {
+    transform: translateX(calc(70px * 1));
+  }
+  li:nth-child(3).active ~ .indicator {
+    transform: translateX(calc(70px * 2));
+  }
+  li:nth-child(4).active ~ .indicator {
+    transform: translateX(calc(70px * 3));
+  }
+  li:nth-child(5).active ~ .indicator {
+    transform: translateX(calc(70px * 4));
+  }
+  //!---icon圓圈-背景色---
+  li:nth-child(1).active ~ .indicator::before {
+    background: #f53b57;
+  }
+  li:nth-child(2).active ~ .indicator::before {
+    background: #3c40c6;
+  }
+  li:nth-child(3).active ~ .indicator::before {
+    background: #05c46b;
+  }
+  li:nth-child(4).active ~ .indicator::before {
+    background: #0fbcf9;
+  }
+  li:nth-child(5).active ~ .indicator::before {
+    background: #ffa801;
+  }
+}
